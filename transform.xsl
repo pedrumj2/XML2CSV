@@ -1,5 +1,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="TestbedMonJun14Flows">
+<xsl:value-of select="appName"/><xsl:text>,</xsl:text>
 <xsl:value-of select="totalSourceBytes"/><xsl:text>,</xsl:text>
 <xsl:value-of select="totalDestinationBytes"/><xsl:text>,</xsl:text>
 <xsl:value-of select="totalDestinationPackets"/><xsl:text>,</xsl:text>
