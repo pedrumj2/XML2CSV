@@ -14,85 +14,6 @@
  
 FILE *fopen64(const char *filename, const char *mode);
 
-struct pcap_header {
-        uint32_t magic_number;   /* magic number */
-        uint16_t version_major;  /* major version number */
-        uint16_t version_minor;  /* minor version number */
-        int32_t  thiszone;       /* GMT to local correction */
-        uint32_t sigfigs;        /* accuracy of timestamps */
-        uint32_t snaplen;        /* max length of captured packets, in octets */
-        uint32_t network;        /* data link type */
-};
-
-struct pcap_record {
-        uint32_t ts_sec;         /* timestamp seconds */
-        uint32_t ts_usec;        /* timestamp microseconds */
-        uint32_t incl_len;       /* number of octets of packet saved in file */
-        uint32_t orig_len;       /* actual length of packet */
-};
-
-
-/*B6 is rightmost byte*/
-struct mac{
-	char B1;
-	char B2;
-	char B3;
-	char B4;
-	char B5;
-	char B6;	
-};
-
-
-struct IP{
-	char B1;
-	char B2;
-	char B3;
-	char B4;
-};
-struct flow_rec{
-  
-	char *ing;
-	struct mac *macSrc;
-	struct mac *macDst;
-	unsigned char EthType[2];
-	char *VlanID;
-	char *VlanPri;
-	struct IP *IPSrc;
-	struct IP *IPDst;
-	char IPProto;
-	char IPTOS;
-	char SrcPort[2];
-	char DstPort[2];
-	unsigned char Vlantag[2];
-	unsigned char Flags[2];
-	int SYN;
-	int FIN;
-	int RES;
-	int ACK;
-	
-};
-
-int bigEndian;
-
-uint32_t fix_end32(uint32_t __intput){
-	if (bigEndian == 1){
-		return __intput;
-	}
-	else{
-		return __bswap_32(__intput);
-	}
-
-}
-
-uint16_t fix_end16(uint16_t __intput){
-	if (bigEndian == 1){
-		return __intput;
-	}
-	else{
-		return __bswap_16(__intput);
-	}
-
-}
 void read_gen_headers(FILE *__fd){
 
 	struct pcap_header *pcap_General;
@@ -391,7 +312,7 @@ int main(int argc, char *argv[]){
 	int i;
 	int read_bytes;
   char *_line;
-   size_t *_n
+   size_t *_n;
 	if (argc < 2){
 		printf("Input format: <Executable> <input file>\n");
      return 1;
@@ -405,8 +326,9 @@ int main(int argc, char *argv[]){
   read_bytes = 1;
   _line = (char *) malloc(sizeof(char)*10000);
   read_bytes = getline(_line, _n, fd);
+  printf(read_bytes);
   
-  while(read_bytes >0){
+ /* while(read_bytes >0){
   	
    read_packet_header(fd, rec_header, _flow_rec);
     
@@ -430,7 +352,7 @@ int main(int argc, char *argv[]){
     
     	read_bytes = fread(rec_header, sizeof(struct pcap_record), 1, fd); 
     
-  }
+  }*/
   
   fclose(fd);
 	
