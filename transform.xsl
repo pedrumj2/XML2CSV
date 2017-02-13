@@ -1,5 +1,6 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:template match="TestbedSatJun12">
+<xsl:template match="TestbedThuJun17-1Flows">
+<xsl:value-of select="appName"/><xsl:text>,</xsl:text>
 <xsl:value-of select="totalSourceBytes"/><xsl:text>,</xsl:text>
 <xsl:value-of select="totalDestinationBytes"/><xsl:text>,</xsl:text>
 <xsl:value-of select="totalDestinationPackets"/><xsl:text>,</xsl:text>
@@ -13,7 +14,6 @@
 <xsl:value-of select="startDateTime"/><xsl:text>,</xsl:text>
 <xsl:value-of select="stopDateTime"/><xsl:text>,</xsl:text>
 <xsl:value-of select="Tag"/><xsl:text>,</xsl:text>
-
 </xsl:template>
 </xsl:stylesheet>
 
